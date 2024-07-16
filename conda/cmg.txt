@@ -5,7 +5,7 @@
 https://conda.anaconda.org/bioconda/linux-64/seqkit-2.7.0-h9ee0642_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/tzdata-2022a-h191b570_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
-https://conda.anaconda.org/conda-forge/linux-64/ca-certificates-2024.6.2-hbcca054_0.conda
+https://conda.anaconda.org/conda-forge/linux-64/ca-certificates-2024.7.4-hbcca054_0.conda
 https://conda.anaconda.org/conda-forge/noarch/font-ttf-dejavu-sans-mono-2.37-hab24e00_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/font-ttf-inconsolata-3.000-h77eed37_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/font-ttf-source-code-pro-2.038-h77eed37_0.tar.bz2
@@ -176,6 +176,7 @@ https://conda.anaconda.org/conda-forge/linux-64/zeromq-4.3.4-h9c3ff4c_1.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/zlib-1.2.12-h166bdaf_1.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.2-h8a70e8d_1.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/brotli-bin-1.0.9-h166bdaf_7.tar.bz2
+https://conda.anaconda.org/conda-forge/linux-64/expect-5.45.4-h555a92e_0.tar.bz2
 https://conda.anaconda.org/bioconda/linux-64/k8-0.2.5-hd03093a_2.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/krb5-1.19.3-h3790be6_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/libcblas-3.9.0-15_linux64_openblas.tar.bz2
@@ -267,7 +268,7 @@ https://conda.anaconda.org/conda-forge/noarch/attrs-21.4.0-pyhd8ed1ab_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/backcall-0.2.0-pyh9f0ad1d_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/noarch/backports-1.1-pyhd3eb1b0_0.conda
 https://conda.anaconda.org/conda-forge/noarch/cachetools-5.0.0-pyhd8ed1ab_0.tar.bz2
-https://conda.anaconda.org/conda-forge/noarch/certifi-2024.2.2-pyhd8ed1ab_0.conda
+https://conda.anaconda.org/conda-forge/noarch/certifi-2024.7.4-pyhd8ed1ab_0.conda
 https://conda.anaconda.org/conda-forge/noarch/charset-normalizer-2.0.12-pyhd8ed1ab_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/coin-or-utils-2.11.6-h573740c_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/configargparse-1.5.3-pyhd8ed1ab_0.tar.bz2
