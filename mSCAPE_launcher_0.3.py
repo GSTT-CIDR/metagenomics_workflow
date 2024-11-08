@@ -12,6 +12,7 @@ import gzip
 import subprocess
 import shutil
 from tkinter import PhotoImage
+from datetime import datetime
 
 # Path to the YAML configuration file containing terminology dictionaries and settings
 config_path = '/mnt/configs/mscape_config.yaml'
@@ -327,8 +328,45 @@ class MetadataApp:
         if not self.df.empty:
             self.submit_selection()  # Update DataFrame with selected files
             self.extract_fastq_info()  # Extract run_id from FASTQ files
+            self.normalize_collection_date()  # Normalize 'CollectionDate' column
         else:
             messagebox.showwarning("No Data", "Please load a sample sheet first.")
+
+
+    def normalize_collection_date(self):
+        if 'CollectionDate' in self.df.columns:
+            normalized_dates = []
+            for date_str in self.df['CollectionDate']:
+                date_obj = None
+                # Try DD/MM/YYYY
+                try:
+                    date_obj = datetime.strptime(date_str, '%d/%m/%Y')
+                except ValueError:
+                    pass
+                # Try YYYY-MM-DD
+                if date_obj is None:
+                    try:
+                        date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+                    except ValueError:
+                        pass
+                # If still None, try parsing with pandas
+                if date_obj is None:
+                    try:
+                        date_obj = pd.to_datetime(date_str, errors='coerce')
+                        if pd.isnull(date_obj):
+                            date_obj = None
+                    except Exception:
+                        pass
+                if date_obj is not None:
+                    normalized_dates.append(date_obj.strftime('%Y-%m-%d'))
+                else:
+                    normalized_dates.append('')
+                    messagebox.showwarning("Date Parsing Error", f"Could not parse date: {date_str}")
+            self.df['CollectionDate'] = normalized_dates
+        else:
+            messagebox.showwarning("Missing Column", "The 'CollectionDate' column is missing in the DataFrame.")
+
+
 
     def submit_selection(self):
         # Update the DataFrame with the selected file paths
