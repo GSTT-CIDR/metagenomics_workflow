@@ -1,0 +1,26 @@
+Steps to run pipeline:
+
+open terminal to this path:
+ type: "cd /data/metag_pipeline/workflow"
+
+type: "conda activate snakemake" - This should change the (base) to (snakemake) on the left hand side of the terminal line
+
+In the folder /data/metag_pipeline/workflow/ref/ there is a file called: sample_table.csv with 3 column titles:
+Sample - This will be the name the sample is given in the results folder
+
+Directory - This is the path to the data. You only need to give it the name you write in MinKNOW - it already knows to look in the /data/ part. IMPORTANT - At the moment the script looks for the fastq_pass folder past this directory, on the assumption there is a direct path to that file. If a sample has been stopped and restarted and two directorys are present, it might error. I will try to find a fix for this when I'm back
+
+Barcode - This is the barcode you gave it. If its between 1-9 (single digit) dont put the 0 in front, it will do this automatically for you.
+
+Once you have completed the sample_table go back to the "workflow" directory. 
+
+To run the pipeline, type the command:
+
+"snakemake -k --cores 10" 
+
+This will run the pipeline, with -k option telling it not to stop if an error occurs. The number of cores (--cores) is set to 10 on the assumption of 5 samples. General rule should be no.samples * no.time_intervals * 2 (e.g 5 samples x 1 time interval (120 minutes) * 2 = 10 cores
+
+
+Once completed, results are in the results folder. It outputs results as it gets them, so you can access earlier time intervals as they finish. Afterwards, I usually add the date to the end of the results folder. You don't have to create a replacement folder as the script will do that automatically. 
+
+If a species is not there that you think should be look it up in the "/data/metag_pipeline/workflow/ref/index_reference_qnap/metag_ref.names" file. 

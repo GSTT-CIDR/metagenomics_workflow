@@ -1,6 +1,7 @@
 rule centrifuge_bacteria:
     input:
-        micro = "/mnt/results/{sample}/{time}_hours/files/{sample}_{time}_hours_merged.fastq"
+        micro = "/mnt/results/{sample}/{time}_hours/microbial/{sample}_{time}_hours_hg38_removed.fastq"
+        # "/mnt/results/{sample}/{time}_hours/microbial/hg38_unmapped.fastq"
     output:
         raw = "/mnt/results/{sample}/{time}_hours/centrifuge/centrifuge_raw.tsv",
         report = temp("/mnt/results/{sample}/{time}_hours/centrifuge/centrifuge_report_raw.tsv")
@@ -14,7 +15,7 @@ rule centrifuge_bacteria:
 rule parse_centrifuge:
     input:
         file = "/mnt/results/{sample}/{time}_hours/centrifuge/centrifuge_raw.tsv",
-        fastq = "/mnt/results/{sample}/{time}_hours/files/{sample}_{time}_hours_merged.fastq" 
+        fastq = "/mnt/results/{sample}/{time}_hours/microbial/{sample}_{time}_hours_hg38_removed.fastq" 
     output:
         report = "/mnt/results/{sample}/{time}_hours/centrifuge/centrifuge_report.tsv",
         read = "/mnt/results/{sample}/{time}_hours/centrifuge/read_assignments.tsv",

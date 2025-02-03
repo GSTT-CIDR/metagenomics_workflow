@@ -4,7 +4,7 @@ rule abricate_amr:
     output:
         amr = "/mnt/results/{sample}/{time}_hours/amr/amr_results.tsv"
     shell:
-        "abricate --quiet --mincov 90 --db card {input.fq} > {output.amr}"
+        "abricate --mincov 90 --db card {input.fq} > {output.amr}"
 
 
 rule top_centrifuge:
@@ -40,7 +40,7 @@ rule abricate_virulence:
     output:
         vdf = "/mnt/results/{sample}/{time}_hours/amr/virulence_factor_raw.tsv"
     shell:
-        "abricate --quiet --mincov 90 --db vfdb {input.fq} > {output.vdf}"
+        "abricate --mincov 90 --db vfdb {input.fq} > {output.vdf}"
 
 
 rule parse_virulence_results:

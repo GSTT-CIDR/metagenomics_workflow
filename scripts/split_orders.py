@@ -34,18 +34,16 @@ def main():
     df = pd.read_csv(REPORT, sep="\t")
     df["superkingdom"] = df["Tax_ID"].apply(lambda x: get_superkingdom(x, tax))
 
-    # Create a copy when slicing the DataFrame to avoid setting with copy warning
-    viral = df[df["superkingdom"] == "Viruses"].copy()
+    viral = df[df["superkingdom"] == "Viruses"]
     viral_counts = viral["Counts"].sum()
     viral["Percentage"] = viral["Counts"] / viral_counts * 100
 
-    bac = df[df["superkingdom"] != "Viruses"].copy()
+    bac = df[df["superkingdom"] != "Viruses"]
     bac_counts = bac["Counts"].sum()
     bac["Percentage"] = bac["Counts"] / bac_counts * 100
 
     viral.to_csv(VIRAL_REPORT, sep="\t", index=None)
     bac.to_csv(BAC_REPORT, sep="\t", index=None)
-
 
 if __name__ == "__main__":
     main()

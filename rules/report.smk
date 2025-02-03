@@ -14,3 +14,15 @@ rule compile_report:
     script:
         "../scripts/generate_report.py"
 
+## Make optional in config file
+rule transfer_qnap:
+    input:
+        "/mnt/reports/{sample}/{sample}_{time}_hours_report.pdf"
+    output:
+        encrypt = "/mnt/reports/encrypted/{sample}/{sample}_{time}_hours_report_encrypt.pdf",
+        transfer = "/mnt/results/{sample}/{time}_hours/transfer/transferred.txt"
+    shell:
+        """
+        pdftk {input} output {output.encrypt} user_pw cidr22
+        rsync -r {output.encrypt} qnap://mnt/flavia/metagenomics/pilot//mnt/reports/ > {output.transfer}
+        """

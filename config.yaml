@@ -1,0 +1,33 @@
+samples: "sample_table.tsv"
+move: true 
+data_dir: "/data"
+time: [0.5,2,24]
+abundance_threshold: 0.5
+cfg_score: 1000
+viral_score: 1000
+targets: "/mnt/ref/target_organisms.txt"
+parameters:
+  hg38:
+    index: "/mnt/ref/hg38/hg38_new.mmi"
+  centrifuge:
+    index:
+      cmg: "/mnt/ref/centrifuge_idx/bacterial/combined_2311v2"
+      viral: "/mnt/ref/centrifuge_idx/viral/viral_2310"
+taxonomy:
+  dictFile: "/mnt/ref/refseq/Assembly_summary/argos_taxdict.tsv"
+  names: "/mnt/ref/refseq/taxonomy/names.dmp"
+  nodes: "/mnt/ref/refseq/taxonomy/nodes.dmp"
+  refseqDir: "/mnt/ref/refseq/genomes/" # Changed to test argos
+  speciesFileNames: "/mnt/ref/refseq/Assembly_summary/metag_filepaths.txt"
+  speciesTaxMeta: "/mnt/ref/refseq/Assembly_summary/combined_assembly_summary.txt"
+amr:
+  scagaire: "/mnt/ref/scagaire_genes.txt"
+viral:
+  targets: "/mnt/ref/viral/viral_targets.tsv"
+mlst:
+  directory: "/mnt/ref/pubmlst/"
+  list: "/mnt/ref/pubmlst/mlst_organisms.tsv"
+pdf:
+  html: "./ref/Template/report_template.html"
+  css: "./ref/Template/report.css"
+  bootstrap: "./ref/Template/bootstrap.css"

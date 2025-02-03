@@ -5,6 +5,18 @@ import re
 from weasyprint import HTML, CSS
 from datetime import datetime
 
+#RESULTS_DIR = "../../validation//mnt/results/160921_validation_run4_sample15/120_minutes/"
+#SAMPLE = "John Hancock"
+#INTERVAL = 2
+#CFG_PATH = RESULTS_DIR + "centrifuge/centrifuge_report.tsv"
+#AMR_SUMMARY = RESULTS_DIR + "amr/scagaire_gene_summary.tsv"
+#AMR_REPORT = RESULTS_DIR + "amr/scagaire_report.tsv"
+#QC_PATH = RESULTS_DIR + "qc/nanostat_summary.txt"
+#OUTPUT = "../Tester.pdf"
+#REPORT_HTML = "ref/Template/report_template.html"
+#REPORT_CSS = "ref/Template/report.css"
+#BOOTSTRAP_CSS = "ref/Template/bootstrap.css"
+
 SAMPLE = snakemake.wildcards.sample
 INTERVAL = float(snakemake.wildcards.time)
 CFG_PATH = snakemake.input.centrifuge
@@ -23,7 +35,6 @@ SAMTOOLS_STAT = snakemake.input.stats
 THRESHOLD = snakemake.config["abundance_threshold"]
 CFG_THRESHOLD = snakemake.config["cfg_score"]
 TARGETS = snakemake.config["targets"]
-VERSION = snakemake.config["pdf"]["version"]
 
 
 
@@ -62,11 +73,11 @@ def summary_qc(path):
 def samtools_stats(path):
     with open(path, "r") as f:
         data = f.read().splitlines()
-    total_reads = data[0].strip()  # Reads the first line for total read count
-    human_reads = data[1].strip()  # Reads the second line for human read count
-    stats = {"total_reads": total_reads, "human_reads": human_reads}
+    total_reads = data[0].split()[0]
+    human_reads = data[4].split()[0]
+    stats = {"total_reads" : total_reads,
+             "human_reads": human_reads}
     return stats
-
 
 
 def patient_info(path, id):
@@ -76,12 +87,9 @@ def patient_info(path, id):
                    "Experiment": df["Experiment"].values[0],
                    "SampleID": df["SampleID"].values[0],
                    "Barcode": df["Barcode"].values[0],
-                   "Version": VERSION,
                    "SampleType": df["SampleType"].values[0],
-                   "SampleClass": df["SampleClass"].values[0],
-                   "Operator": df["Operator"].values[0],
-                   "Notes": df["Notes"].values[0],
-                   }
+                   "PatientID": df["PatientID"].values[0],
+                   "Operator": df["Operator"].values[0]}
     return sample_dict
 
 # def is_target(s, target_file = TARGETS):
@@ -183,7 +191,6 @@ def viral_report(path):
     viral_dict = dict()
     df = pd.read_csv(path, sep="\t", usecols=["Organism", "Counts"])
     ic = df[df["Organism"] == "Tobacco mosaic virus"]
-    viral_dict["viral_reads"] = sum(df["Counts"])
     if ic.empty:
         viral_dict["ic"] = "NA/NA"
     else:
@@ -197,34 +204,19 @@ def virulence_factors(path):
     vf_dict["vf_report"] = df.to_html(classes="table table-striped", border=0, justify="left", index=False)
     return vf_dict
 
-# Initialize report_dict with basic information
 report_dict = {"time": str(INTERVAL) + " hrs",
                "title": "Clinical metagenomics report",
                "date": datetime.now()}
 
-# Update the dictionary with various reports
 report_dict.update(samtools_stats(SAMTOOLS_STAT))
 report_dict.update(patient_info(SAMPLE_TABLE, SAMPLE))
-
-# Get bacterial and viral reads, and update the dictionary
-bacterial_data = cfg_to_html(CFG_PATH)
-viral_data = viral_report(VIRAL_PATH)
-
-report_dict.update(bacterial_data)
-report_dict.update(viral_data)
-
-# Calculate the sum of bacterial and viral reads and add it to the dictionary
-# Ensure that 'micro_reads' and 'viral_reads' are integers before summing
-sum_reads = bacterial_data.get('micro_reads', 0) + viral_data.get('viral_reads', 0)
-report_dict['sum_reads'] = sum_reads
-
-# Continue updating the dictionary with other reports
+report_dict.update(cfg_to_html(CFG_PATH))
+report_dict.update(viral_report(VIRAL_PATH))
 report_dict.update(summary_qc(QC_PATH))
 report_dict.update(unclassified_reads(CFG_RAW_PATH))
 report_dict.update(amr_summary(AMR_SUMMARY))
 report_dict.update(amr_report(AMR_REPORT, AMR_SUMMARY))
 report_dict.update(virulence_factors(VF_PATH))
-
 
 
 env = Environment(loader=FileSystemLoader(".")) # Change to "." for grid

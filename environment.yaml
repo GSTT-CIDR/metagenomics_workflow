@@ -1,0 +1,22 @@
+name: snakemake
+channels:
+  - defaults
+dependencies:
+  - snakemake
+  - perl-slurp
+  - perl
+  - mash
+  - ncbi-genome-download
+  - minimap2
+  - samtools
+  - taxonomy
+  - mappy
+  - nanostat
+  - abricate==1.0.1
+  - zlib
+  - weasyprint
+  - jinja2
+  - perl-bioperl
+  - t_coffee
+  - perl-bio-tools-run-alignment-tcoffee
+prefix: /home/grid/miniconda3/envs/snakemake

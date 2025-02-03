@@ -1,0 +1,100 @@
+<html lang="en">
+<head>
+    <title>Metagenomics Report</title>
+</head>
+<body>
+    <div id="date">{{report.date.strftime('%B %d, %Y')}}</div>
+    <article id="report">
+        <h4 id="report-title">Patient</h4>
+        <section id = "Tester section">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>Lab ID</th>
+                        <td>{{report.LabID}}</td>
+                        <th>Date:Time</th>
+                        <td>{{report.date.strftime("%m/%d/%Y, %H:%M:%S")}}</td>
+                    </tr>
+                    <tr>
+                        <th>Patient ID</th>
+                        <td>{{report.PatientID}}</td>
+                        <th>Experiment Folder</th>
+                        <td>{{report.Experiment}}</td>
+                    </tr>
+                    <tr>
+                        <th>Sample Type</th>
+                        <td>{{report.SampleType}}</td>
+                        <th>Sample_ID</th>
+                        <td>{{report.SampleID}}</td>
+                    </tr>
+                    <tr>
+                        <th>Time Interval</th>
+                        <td>{{report.time}}</td>
+                        <th>Barcode</th>
+                        <td>{{report.Barcode}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </article>
+    <article id="QC">
+        <h4 id="QC-title">Quality Control</h4>
+        <section id="QC-metrics">
+            <table class="table table-hover">
+                <tr>
+                    <th scope="row">Total microbial reads</th>
+                    <td>{{report.micro_reads}}</td>
+                    <th scope="row">Total reads</th>
+                    <td>{{report.total_reads}}</td>
+                    <th scope="row">Total human reads</th>
+                    <td>{{report.human_reads}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total bases</th>
+                    <td>{{report.total_bp}}</td>
+                    <th scope="row">Mean read length</th>
+                    <td>{{report.mean_read_len}}</td>
+                    <th scope="row">Mean read quality</th>
+                    <td>{{report.mean_read_qual}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Internal control (TMV) </th>
+                    <td>{{report.ic}}</td>
+                    <th scope="row">Negative Control</th>
+                    <td class="checkbox"><input type="checkbox" name="Pass", id="NC" \> Pass <input type="checkbox" name="Fail", id="NC" \> Fail </td>
+                    <th scope="row">Unclassified/Below Threshold</th>
+                    <td>{{report.unclass_reads}}/{{report.reads_below_threshold}}</td>
+                </tr>
+
+            </table>
+        </section>
+    </article>
+    <article id="Centrifuge-top">
+        <h4>Centrifuge Hits - Above Threshold</h4>
+        <section id="Centrifuge-table">
+            {{report.cfg_top}}
+        </section>
+    </article>
+    <article id="Viral-report">
+        <h4>Viral report</h4>
+        <section id="Viral-table">
+            {{report.viral_report}}
+        </section>
+    </article>
+    <article id="AMR">
+        <h4 class="new-page">Antimicrobial resistance summary</h4>
+        <section id="AMR-summary-table">
+            {{report.amr_summary}}
+        </section>
+        <h4 class="new-page">Antimicrobial resistance report</h4>
+        <section id="AMR-report">
+            {{report.amr_report}}
+        </section>
+    </article>
+    <article id="Centrifuge-full">
+        <h4 class="new-page">Centrifuge Full</h4>
+        <section id="Centrifuge-report">
+            {{report.cfg_full}}
+        </section>
+    </article>
+</body>

@@ -7,14 +7,12 @@ import taxonomy
 from collections import Counter
 import json
 import traceback
-from prettytable import PrettyTable
 
 # SNAKEMAKE ARGUMENTS
 NODES = snakemake.config["taxonomy"]["nodes"]
 NAMES = snakemake.config["taxonomy"]["names"]
 CENTRIFUGE_FILE = snakemake.input.file
 CFG_THRESHOLD = snakemake.config["cfg_score"]
-#VIRAL_THRESHOLD = snakemake.config["viral_score"]
 TAXMETA = snakemake.config["taxonomy"]["speciesTaxMeta"]
 FILENAMES = snakemake.config["taxonomy"]["speciesFileNames"]
 FASTQ = snakemake.input.fastq
@@ -24,90 +22,34 @@ FAILED_OUTPUT = snakemake.output.failed
 READ_OUTPUT = snakemake.output.read
 REPORT_OUTPUT = snakemake.output.report
 DICT_FILE = snakemake.config["taxonomy"]["dictFile"]
-#VIRAL_TAXID = snakemake.config["taxonomy"]["viral_taxid"]
-#SKIP_TAXID = snakemake.config["taxonomy"]["skip_taxid"]
-THRESHOLD_CONFIG = snakemake.config["taxonomy"]["threshold_config"]
-REPLACEMENT_LIST = snakemake.config["taxonomy"]["replacement_list"]
 
 
-def remove_low_qual_reads(df, default_threshold, taxid_thresholds_path):
+def remove_low_qual_reads(df, threshold = 300):
     """
-    Filters reads with scores below the designated threshold, applying specific thresholds for taxids
-    listed in the JSON files specified in the ranking.txt file. A threshold of '0' effectively skips
-    the threshold check for specific taxids.
+    Filters reads with scores below the designated threshold.
 
     Parameters
     ----------
-    df : pandas.DataFrame
-        Centrifuge output as pandas DataFrame.
-    default_threshold : int
-        Default centrifuge score threshold for false positive reads.
-    taxid_thresholds_path : str
-        Path to the directory containing the ranking.txt and JSON files.
+    df
+        centrifuge output as pandas DataFrame
+    threshold
+        centrifuge score threshold for false positive reads. Default: 300
 
     Returns
     -------
-    tuple
-        A tuple containing two elements:
-        - above_threshold (pandas.DataFrame): Centrifuge dataframe with reads above score threshold.
-        - failed (dict): Dictionary of failed reads due to low score.
-          Format: {readID: {alignment: False, "reason": "score below threshold"}}.
+    above_threshold
+        centrifuge dataframe with reads above score threshold
+    failed
+        dictionary of failed reads due to low score
+        {readID: {alignment: False, reason: score below threshold}}
+
     """
-    
-    print(f"Default threshold set to: {default_threshold}")
-
-    # Read the ranking.txt file to determine the order of JSON files
-    with open(os.path.join(taxid_thresholds_path, 'ranking.txt'), 'r') as f:
-        json_files = [line.strip() for line in f]
-
-    # Initialize an empty dictionary for taxid to score mapping
-    taxid_score_dict = {}
-    pretty_table = PrettyTable()
-    pretty_table.field_names = ["Name", "Score"]
-
-    # Read each JSON file as per the hierarchy and populate the dictionary
-    for json_file in json_files:
-        with open(os.path.join(taxid_thresholds_path, json_file), 'r') as f:
-            data = json.load(f)
-            name = data['Name']
-            score = data['Score']
-            taxids = data['TaxIDs']
-
-            # Update the dictionary with taxid:score pairs
-            for taxid in taxids:
-                taxid_score_dict[taxid] = score
-
-            # Add entry to the pretty table
-            pretty_table.add_row([name, score])
-
-    # Print the pretty table
-    print(pretty_table)
-
-    # Determine the appropriate threshold for each read
-    def determine_threshold(taxid):
-        return taxid_score_dict.get(taxid, default_threshold)
-
-    # Apply filtering based on thresholds
-    def apply_filtering(row):
-        threshold = determine_threshold(row['taxID'])
-        if threshold == 0:
-            return True
-        return row['score'] > threshold
-
-    df['pass_filter'] = df.apply(apply_filtering, axis=1)
-
-    # Separate above and below threshold reads
-    above_threshold = df[df['pass_filter']].copy()
-    below_threshold_df = df[~df['pass_filter']].copy()
-
-    # Construct failed dictionary
-    rejected_reads = below_threshold_df["readID"].unique()
-    failed = {read_id: {"alignment": False, "reason": "score below threshold"} for read_id in rejected_reads}
-
-    above_threshold = above_threshold.drop(columns=['pass_filter'])
-    below_threshold_df = below_threshold_df.drop(columns=['pass_filter'])
-
+    print("Centrifuge threshold set  to: {}".format(threshold))
+    above_threshold = df[df["score"] > threshold]
+    rejected_reads = df[df["score"] < threshold]["readID"].unique()
+    failed = {k:{"alignment": False, "reason": "score below threshold"} for k in rejected_reads}
     return above_threshold, failed
+
 
 def species_id(taxID, tax, rank = "species"):
     """
@@ -276,7 +218,7 @@ try:
 
         print("data loaded.... starting counts")
 
-        above_threshold, failed = remove_low_qual_reads(df, CFG_THRESHOLD, THRESHOLD_CONFIG)
+        above_threshold, failed = remove_low_qual_reads(df, CFG_THRESHOLD)
         report_dict, multi_hit_dict = split_hits(above_threshold, tax)
 
         print("Starting multi-match resolution")
@@ -326,21 +268,27 @@ try:
         report_df = report_df.sort_values(by="Percentage", ascending=False)
         report_df = report_df[["Organism", "Tax_ID", "Counts", "Percentage"]]
 
-        # Path to CSV file in ref directory containing specific species/strain name replacements.
-        species_complex_csv = pd.read_csv(REPLACEMENT_LIST)
+        ## Adding E.cloacae complex to species within this
+        species_complex = {"Enterobacter asburiae": "Enterobacter asburiae (E. cloacae complex)",
+                        "Enterobacter cancerogenus": "Enterobacter cancerogenus (E. cloacae complex)",
+                        "Enterobacter hormaechei": "Enterobacter hormaechei (E. cloacae complex)",
+                        "Enterobacter ludwigii": "Enterobacter ludwigii (E. cloacae complex",
+                        "Enterobacter roggenkampii": "Enterobacter roggenkampii (E. cloacae complex)",
+                        "Enterobacter bugandensis": "Enterobacter bugandensis (E. cloacae complex)",
+                        "Citrobacter portucalensis": "Citrobacter portucalensis (C. freundii complex)",
+                        "Citrobacter werkmanii": "Citrobacter werkmanii (C. freundii complex)",
+                        "Klebsiella michiganensis": "Klebsiella michiganensis (K. oxytoca complex)"}
 
-        # Replace directly using the CSV data
-        report_df['Organism'] = report_df['Organism'].replace(species_complex_csv.set_index('Original')['Replacement'])
+        report_df = report_df.replace({"Organism": species_complex})
         report_df.to_csv(REPORT_OUTPUT, index=False, sep="\t")
 
 
         end = time.time()
         print("Time to run is {} seconds".format(end - start))
 except Exception as e:
-    log_directory = '/mnt/'  # Update this path
-    log_path = f'{log_directory}/error.log'
-    with open(log_path, 'w') as f:
+    with open('error.log', 'w') as f:
         f.write(traceback.format_exc())
         
 if __name__ == "__main__":
     main()
+
