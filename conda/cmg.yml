@@ -1,5 +1,6 @@
 name: cmg
 channels:
+  - plotly
   - anaconda
   - defaults
   - bioconda
@@ -29,22 +30,22 @@ dependencies:
   - backports.functools_lru_cache=1.6.4=pyhd8ed1ab_0
   - bcrypt=3.2.2=py37h540881e_0
   - beautifulsoup4=4.11.1=pyha770c72_0
+  - binutils_impl_linux-64=2.43=h4bf12b8_4
   - biopython=1.79=py37h540881e_2
   - blast=2.12.0=hf3cf87c_4
   - bleach=5.0.1=pyhd8ed1ab_0
   - boto3=1.24.12=pyhd8ed1ab_0
-  - botocore=1.27.13=pyhd8ed1ab_0
   - brotli=1.0.9=h166bdaf_7
   - brotli-bin=1.0.9=h166bdaf_7
   - brotlipy=0.7.0=py37h540881e_1004
   - bzip2=1.0.8=h7f98852_4
   - c-ares=1.18.1=h7f98852_0
-  - ca-certificates=2024.2.2=hbcca054_0
+  - ca-certificates=2025.1.31=hbcca054_0
   - cachetools=5.0.0=pyhd8ed1ab_0
   - cairo=1.16.0=ha12eb4b_1010
   - capnproto=0.9.1=h780b84a_5
-  - certifi=2024.2.2=pyhd8ed1ab_0
-  - cffi=1.15.0=py37h036bc23_0
+  - certifi=2024.8.30=pyhd8ed1ab_0
+  - cffi=1.15.1=py37h5eee18b_3
   - charset-normalizer=2.0.12=pyhd8ed1ab_0
   - clustalw=2.1=h9f5acd7_7
   - coin-or-cbc=2.10.8=h3786ebc_0
@@ -64,12 +65,12 @@ dependencies:
   - decorator=5.1.1=pyhd8ed1ab_0
   - defusedxml=0.7.1=pyhd8ed1ab_0
   - deprecated=1.2.13=pyh6c4a22f_0
-  - docutils=0.18.1=py37h89c1867_1
   - dropbox=11.32.0=pyhd8ed1ab_0
   - entrez-direct=16.2=he881be0_1
   - entrypoints=0.4=pyhd8ed1ab_0
   - et_xmlfile=1.1.0=pyhd8ed1ab_0
   - expat=2.4.8=h27087fc_0
+  - expect=5.45.4=h555a92e_0
   - fftw=3.3.10=nompi_h77c792f_102
   - filechunkio=1.8=py_2
   - filelock=3.7.1=pyhd8ed1ab_0
@@ -86,6 +87,7 @@ dependencies:
   - fribidi=1.0.10=h36c2ea0_0
   - frozenlist=1.3.0=py37h540881e_1
   - ftputil=5.0.4=pyhd8ed1ab_0
+  - gcc_impl_linux-64=14.2.0=hdb7739f_2
   - gdk-pixbuf=2.42.8=hff1cb4f_0
   - gettext=0.21.0=hf68c758_0
   - ghostscript=9.54.0=h27087fc_2
@@ -94,6 +96,7 @@ dependencies:
   - gitpython=3.1.27=pyhd8ed1ab_0
   - glib=2.70.2=h780b84a_4
   - glib-tools=2.70.2=h780b84a_4
+  - gmp=6.3.0=h59595ed_1
   - google-api-core=2.8.2=pyhd8ed1ab_0
   - google-api-python-client=2.51.0=pyhd8ed1ab_0
   - google-auth=2.8.0=pyh6c4a22f_0
@@ -138,11 +141,12 @@ dependencies:
   - jupyterlab_pygments=0.2.2=pyhd8ed1ab_0
   - jupyterlab_server=2.10.3=pyhd8ed1ab_0
   - k8=0.2.5=hd03093a_2
+  - kernel-headers_linux-64=3.10.0=he073ed8_18
   - keyutils=1.6.1=h166bdaf_0
   - kiwisolver=1.4.3=py37h7cecad7_0
   - krb5=1.19.3=h3790be6_0
   - lcms2=2.12=hddcbb42_0
-  - ld_impl_linux-64=2.38=h1181459_1
+  - ld_impl_linux-64=2.43=h712a8e2_4
   - lerc=2.2.1=h9c3ff4c_0
   - libblas=3.9.0=15_linux64_openblas
   - libbrotlicommon=1.0.9=h166bdaf_7
@@ -156,12 +160,14 @@ dependencies:
   - libedit=3.1.20210714=h7f8727e_0
   - libev=4.33=h516909a_1
   - libffi=3.4.2=h7f98852_5
-  - libgcc-ng=12.1.0=h8d9b700_16
+  - libgcc=14.2.0=h77fa898_1
+  - libgcc-devel_linux-64=14.2.0=h9c4974d_102
+  - libgcc-ng=14.2.0=h69a702a_1
   - libgd=2.3.3=h283352f_2
   - libgfortran-ng=12.1.0=h69a702a_16
   - libgfortran5=12.1.0=hdcd56e2_16
   - libglib=2.70.2=h174f98d_4
-  - libgomp=12.1.0=h8d9b700_16
+  - libgomp=14.2.0=h77fa898_1
   - libiconv=1.16=h516909a_0
   - libidn2=2.3.2=h7f98852_0
   - liblapack=3.9.0=15_linux64_openblas
@@ -172,8 +178,10 @@ dependencies:
   - libpng=1.6.37=h21135ba_2
   - libprotobuf=3.20.1=h6239696_0
   - librsvg=2.52.5=hc3c00ef_1
+  - libsanitizer=14.2.0=hed042b8_2
   - libsodium=1.0.18=h36c2ea0_1
   - libssh2=1.10.0=ha56f1ee_2
+  - libstdcxx=14.2.0=hc0a3c3a_1
   - libstdcxx-ng=12.1.0=ha89aaad_16
   - libtiff=4.3.0=hf544144_1
   - libtool=2.4.6=h9c3ff4c_1008
@@ -184,7 +192,7 @@ dependencies:
   - libxcb=1.13=h7f98852_1004
   - libxml2=2.9.12=h885dcf4_1
   - libxslt=1.1.33=h0ef7038_3
-  - libzlib=1.2.12=h166bdaf_1
+  - libzlib=1.2.13=h4ab18f5_6
   - logmuse=0.2.6=pyh8c360ce_0
   - lxml=4.8.0=py37h540881e_2
   - lz4-c=1.9.3=h9c3ff4c_1
@@ -438,9 +446,9 @@ dependencies:
   - pexpect=4.8.0=py37hc8dfbb8_1
   - pickleshare=0.7.5=py37hc8dfbb8_1002
   - pillow=9.1.1=py37h44f0d7a_1
-  - pip=22.1.2=pyhd8ed1ab_0
   - pixman=0.40.0=h36c2ea0_0
   - pkg-config=0.29.2=h36c2ea0_1008
+  - plotly=5.24.1=py_0
   - pluggy=1.0.0=py37h89c1867_3
   - ply=3.11=py_1
   - prettytable=3.3.0=pyhd8ed1ab_0
@@ -455,6 +463,7 @@ dependencies:
   - pyasn1=0.4.8=py_0
   - pyasn1-modules=0.2.8=py_0
   - pycparser=2.21=pyhd8ed1ab_0
+  - pycryptodome=3.15.0=py37h294ce10_0
   - pydyf=0.2.0=pyhd8ed1ab_0
   - pyfastx=0.8.4=py37ha26db04_1
   - pygments=2.12.0=pyhd8ed1ab_0
@@ -467,8 +476,9 @@ dependencies:
   - pysam=0.17.0=py37h45aed0b_0
   - pysftp=0.2.9=py_1
   - pysocks=1.7.1=py37h89c1867_5
+  - pytaxonkit=0.9.1=pyhdfd78af_1
   - pytest=7.1.2=py37h89c1867_0
-  - python>=3.8
+  - python=3.7.12=hb7a2778_100_cpython
   - python-dateutil=2.8.2=pyhd8ed1ab_0
   - python-fastjsonschema=2.15.3=pyhd8ed1ab_0
   - python-irodsclient=1.1.3=pyhd8ed1ab_0
@@ -481,14 +491,13 @@ dependencies:
   - re2=2022.04.01=h27087fc_0
   - readline=8.1=h46c0cb4_0
   - requests=2.28.0=pyhd8ed1ab_0
-  - rsa=4.8=pyhd8ed1ab_0
-  - s3transfer=0.6.0=pyhd8ed1ab_0
+  - rust=1.77.2=h70c747d_1
+  - rust-std-x86_64-unknown-linux-gnu=1.77.2=h2c6d0dc_1
   - samtools=1.12=h9aed4be_1
   - scagaire=0.0.4=py_0
   - scipy=1.7.3=py37hf2a6cf1_0
   - send2trash=1.8.0=pyhd8ed1ab_0
   - seqkit=2.7.0=h9ee0642_0
-  - setuptools=59.8.0=py37h89c1867_1
   - setuptools-scm=6.4.2=pyhd8ed1ab_0
   - six=1.16.0=pyh6c4a22f_0
   - slacker=0.14.0=py_0
@@ -501,9 +510,14 @@ dependencies:
   - sqlite=3.38.3=hc218d9a_0
   - stone=3.3.1=pyhd8ed1ab_0
   - stopit=1.1.2=py_0
+  - sylph=0.8.0=ha6fb395_0
+  - sylph-tax=1.1.1=pyhdfd78af_1
+  - sysroot_linux-64=2.17=h0157908_18
   - t_coffee=11.0.8=py37hea885bf_8
   - tabulate=0.8.9=pyhd8ed1ab_0
+  - taxonkit=0.18.0=h9ee0642_0
   - taxonomy=0.7.1=py37h8902056_1
+  - tenacity=8.2.3=pyhd8ed1ab_0
   - terminado=0.15.0=py37h89c1867_0
   - tidyp=1.04=hec16e2b_4
   - tinycss2=1.1.1=pyhd8ed1ab_0
@@ -526,7 +540,6 @@ dependencies:
   - webencodings=0.5.1=py_1
   - websocket-client=1.3.3=pyhd8ed1ab_0
   - wget=1.21.3=h0b77cf5_0
-  - wheel=0.37.1=pyhd8ed1ab_0
   - wrapt=1.14.1=py37h540881e_0
   - xlsxwriter=3.1.9=pyhd8ed1ab_0
   - xorg-kbproto=1.0.7=h7f98852_1002
@@ -546,9 +559,29 @@ dependencies:
   - yarl=1.7.2=py37h540881e_2
   - zeromq=4.3.4=h9c3ff4c_1
   - zipp=3.8.0=pyhd8ed1ab_0
-  - zlib=1.2.12=h166bdaf_1
+  - zlib=1.2.13=h4ab18f5_6
   - zstd=1.5.2=h8a70e8d_1
   - pip:
+      - awscli==1.31.13
+      - botocore==1.33.13
+      - colorama==0.4.4
       - colour==0.1.5
+      - crypto==1.4.1
+      - docutils==0.16
+      - jaraco-classes==3.2.3
+      - jeepney==0.8.0
+      - keyring==24.1.1
+      - maturin==1.8.3
+      - more-itertools==9.1.0
+      - naked==0.1.32
+      - pip==24.0
+      - rsa==4.7.2
+      - s3transfer==0.8.2
+      - secretstorage==3.3.3
+      - setuptools==68.0.0
+      - shellescape==3.8.1
       - styleframe==4.2
+      - tkcalendar==1.6.1
+      - watchdog==3.0.0
+      - wheel==0.42.0
 prefix: /home/dan_cidr/miniforge3/envs/cmg

@@ -194,10 +194,15 @@ tk.Button(root, text="Load list of sample names", command=load_sample_list).grid
 
 # Relative abundance dropdown
 tk.Label(root, text="Relative Abundance threshold:").grid(row=4, column=0, padx=10, pady=5, sticky='e')
+
 abundance_threshold_var = tk.StringVar()
-abundance_threshold_var.set("1.0")
-abundance_threshold_options = [str(x/10) for x in range(1, 51)]
+abundance_threshold_var.set("0.0")  # Set default to 0.0
+
+# Create options from 0.0 to 1.0 (inclusive) in steps of 0.1
+abundance_threshold_options = [str(x/10) for x in range(0, 11)]
+
 tk.OptionMenu(root, abundance_threshold_var, *abundance_threshold_options).grid(row=4, column=1, padx=10, pady=5, sticky='w')
+
 
 # Output format checkbox
 xlsx_output_format = tk.BooleanVar(value=True)
