@@ -147,7 +147,6 @@ pyrsistent
 pysam==0.17.0
 pysftp==0.2.9
 PySocks 
-pytaxonkit 
 pytest==7.1.2
 python-dateutil 
 python-irodsclient 
