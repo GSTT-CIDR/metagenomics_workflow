@@ -4,7 +4,7 @@
 @EXPLICIT
 https://conda.anaconda.org/bioconda/linux-64/seqkit-2.7.0-h9ee0642_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
-https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2025.4.26-hbd8a1cb_0.conda
+https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2025.8.3-hbd8a1cb_0.conda
 https://conda.anaconda.org/conda-forge/noarch/font-ttf-dejavu-sans-mono-2.37-hab24e00_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/font-ttf-inconsolata-3.000-h77eed37_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/font-ttf-source-code-pro-2.038-h77eed37_0.tar.bz2
@@ -16,7 +16,7 @@ https://conda.anaconda.org/conda-forge/linux-64/libgfortran5-12.1.0-hdcd56e2_16.
 https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-ng-12.1.0-ha89aaad_16.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/pandoc-2.19-ha770c72_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/rust-std-x86_64-unknown-linux-gnu-1.77.2-h2c6d0dc_1.conda
-https://conda.anaconda.org/bioconda/linux-64/taxonkit-0.18.0-h9ee0642_0.tar.bz2
+https://conda.anaconda.org/bioconda/linux-64/taxonkit-0.20.0-h9ee0642_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/typing-extensions-4.2.0-hd8ed1ab_1.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/tzdata-2022a-h191b570_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/fonts-conda-forge-1-0.tar.bz2
