@@ -429,7 +429,6 @@ https://conda.anaconda.org/conda-forge/linux-64/sniffio-1.2.0-py37h89c1867_3.tar
 https://conda.anaconda.org/conda-forge/noarch/stone-3.3.1-pyhd8ed1ab_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/stopit-1.1.2-py_0.tar.bz2
 https://conda.anaconda.org/bioconda/linux-64/t_coffee-11.0.8-py37hea885bf_8.tar.bz2
-https://conda.anaconda.org/bioconda/linux-64/taxonomy-0.7.1-py37h8902056_1.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/tinycss2-1.1.1-pyhd8ed1ab_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/tornado-6.2-py37h540881e_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/unicodedata2-14.0.0-py37h540881e_1.tar.bz2
@@ -473,6 +472,7 @@ https://conda.anaconda.org/bioconda/linux-64/perl-xml-simple-2.25-pl526_1.tar.bz
 https://conda.anaconda.org/conda-forge/linux-64/pynacl-1.5.0-py37h540881e_1.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/scipy-1.7.3-py37hf2a6cf1_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/setuptools-scm-6.4.2-pyhd8ed1ab_0.tar.bz2
+https://conda.anaconda.org/bioconda/linux-64/taxonomy-0.9.0-py37h8902056_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/terminado-0.15.0-py37h89c1867_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/wcwidth-0.2.5-pyh9f0ad1d_2.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/yarl-1.7.2-py37h540881e_2.tar.bz2
