@@ -27,5 +27,7 @@ After execution, the luncher GUI should appear. Refer to the WEBPAGE for documen
 apptainer run --bind /tmp/.X11-unix:/tmp/.X11-unix --bind /:/mnt --env DISPLAY=$DISPLAY organism_query.sif 
 ```
 
-##For the metagenomics
+## For the metagenomics
+```
 apptainer run --bind /tmp/.X11-unix:/tmp/.X11-unix --bind ../:/mnt --bind /data:/data --env DISPLAY=$DISPLAY cidr_metagenomics.sif
+```
